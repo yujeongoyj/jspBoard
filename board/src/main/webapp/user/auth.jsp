@@ -21,11 +21,14 @@
     UserController userController = new UserController(connector);
 
     UserDTO result = userController.auth(userDTO);
+    //int a = result.getId();
 
     if(result != null){
         // 로그인 성공
         // 현재 로그인을 성공한 정보를 어디서든 불러올 수 있는 곳에 저장한다.
         session.setAttribute("login", result);
+
+
 
         // 게시판으로 이동한다.
         // 우리가 특정 JSP 페이지에서 다른 페이지로 강제로 이동시킬 때에는
