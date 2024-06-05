@@ -4,6 +4,7 @@ import com.mysql.cj.protocol.Resultset;
 import connector.MySqlConnector;
 import model.UserDTO;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,24 +46,21 @@ public class UserController {
 
     }
 
-    public boolean register(UserDTO userDTO){
-
-        String query = "INSERT INTO user (username, password, nickname) VALUES(?,?,?)";
-
+    public boolean register(UserDTO attempt){
+        String query = "INSERT INTO user(username, password, nickname) VALUES(?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, userDTO.getUsername());
-            preparedStatement.setString(2, userDTO.getPassword());
-            preparedStatement.setString(3, userDTO.getNickname());
+            preparedStatement.setString(1, attempt.getUsername());
+            preparedStatement.setString(2, attempt.getPassword());
+            preparedStatement.setString(3, attempt.getNickname());
 
             preparedStatement.executeUpdate();
-
-            return true;
 
         } catch (SQLException e){
             e.printStackTrace();
             return false;
         }
 
+       return true;
     }
 }

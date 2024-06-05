@@ -1,12 +1,6 @@
 <%@ page import="model.UserDTO" %>
 <%@ page import="connector.MySqlConnector" %>
-<%@ page import="controller.UserController" %><%--
-  Created by IntelliJ IDEA.
-  User: BIT
-  Date: 2024-06-05
-  Time: 오후 4:55
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="controller.UserController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,6 +19,14 @@
 
     MySqlConnector connector = new MySqlConnector();
     UserController userController = new UserController(connector);
+
+    boolean result = userController.register(attempt);
+
+    if(result) {
+        response.sendRedirect("/");
+    } else {
+        response.sendRedirect("/error/showError.jsp?code=Duplicated");
+    }
 
 %>
 
